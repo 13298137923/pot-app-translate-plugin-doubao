@@ -28,11 +28,17 @@ async function translate(text, from, to, options) {
     model: model,
     temperature: 0,
     stream: false,
+
+    // 关闭深度思考：翻译不需要思考过程，这样通常会快很多
+    thinking: {
+      type: "disabled"
+    },
+
     messages: [
       {
         role: "system",
         content:
-          "你是一个专业翻译引擎。请严格翻译用户输入的文本。只输出译文，不要解释，不要添加注释，不要使用 Markdown。保留原文中的换行、数字、链接、专有名词和代码格式。"
+          "你是一个专业学术翻译引擎。请严格翻译用户输入的文本。只输出译文，不要解释，不要总结，不要添加注释，不要使用 Markdown。保留原文中的换行、数字、公式、引用编号、缩写、专有名词、拉丁学名和代码格式。遇到学术术语时使用准确、自然的中文表达。"
       },
       {
         role: "user",
